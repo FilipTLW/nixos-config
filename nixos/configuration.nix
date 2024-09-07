@@ -123,6 +123,9 @@ in
     spotify
     steam
     openrgb-with-all-plugins
+    protonplus
+    xclicker
+    gimp
   ];
 
   programs.tmux = {
