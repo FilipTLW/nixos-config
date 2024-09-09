@@ -63,7 +63,7 @@ in
   console = {
     #font = "Lat2-Terminus16";
     keyMap = lib.mkForce "de";
-    useXkbConfig = true; # use xkb.options in tty.
+    useXkbConfig = true; # use xkb.options in tty.k
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -106,7 +106,7 @@ in
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   home-manager.users.filip = import ../home-manager/home.nix;
-  
+
   users.users.filip = {
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
@@ -126,6 +126,9 @@ in
     protonplus
     xclicker
     gimp
+    godot_4-mono
+    libreoffice-qt6-still
+    obs-studio
   ];
 
   programs.tmux = {
@@ -138,7 +141,7 @@ in
   garuda.dr460nized.enable = true;
   garuda.networking.iwd = false;
   garuda.performance-tweaks.enable = true;
-  garuda.performance-tweaks.cachyos-kernel  = true;
+  garuda.performance-tweaks.cachyos-kernel = true;
 
   services.flatpak.enable = true;
   # Some programs need SUID wrappers, can be configured further or are
