@@ -70,7 +70,7 @@ in
 
   services.desktopManager.plasma6.enable = true;
 
-  # Enable the X11 windowing system.
+  # Enable the X11   windowing system.
   services.xserver.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
 
@@ -86,7 +86,7 @@ in
   # OR
   services.pipewire = {
     enable = true;
-    pulse.enable = true;
+    pulse.enable = true;  
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
@@ -129,6 +129,8 @@ in
     godot_4-mono
     libreoffice-qt6-still
     obs-studio
+    smartmontools
+    ferium
   ];
 
   programs.tmux = {
