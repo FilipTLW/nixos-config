@@ -120,6 +120,7 @@ in
     discord
     brave
     rider
+    jetbrains.idea-ultimate
     spotify
     steam
     openrgb-with-all-plugins
@@ -131,6 +132,9 @@ in
     obs-studio
     smartmontools
     ferium
+    prismlauncher
+    termscp
+    telegram-desktop
   ];
 
   programs.tmux = {
