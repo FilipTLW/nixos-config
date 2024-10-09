@@ -117,9 +117,9 @@ in
   environment.systemPackages = with pkgs; [
     neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
-    discord
     brave
     rider
+    jetbrains.phpstorm
     jetbrains.idea-ultimate
     spotify
     steam
@@ -135,6 +135,12 @@ in
     prismlauncher
     termscp
     telegram-desktop
+    vesktop
+    kalker
+    teams-for-linux
+    postman
+    nodejs_22
+    pnpm
   ];
 
   programs.tmux = {
