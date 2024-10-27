@@ -30,8 +30,16 @@
   programs.home-manager.enable = true;
   programs.git = {
     enable = true;
-    userName = "FilipTLW";
+    userName = "Filip Myslinski";
     userEmail = "filipmyslinski2006@gmail.com";
+  };
+  
+  programs.brave = {
+    enable = true;
+    extensions = [
+      { id = "aicmkgpgakddgnaphhhpliifpcfhicfo"; } # postman interceptor
+      { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; }
+    ];
   };
 
   # Nicely reload system units when changing configs

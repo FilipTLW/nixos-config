@@ -35,6 +35,8 @@ in
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ../modules/user.nix
+    ../modules/containers/containers.nix
   ];
 
   nix.settings.experimental-features = [
@@ -78,6 +80,8 @@ in
   services.xserver.xkb.layout = "de";
   services.xserver.xkb.options = "eurosign:e,caps:escape";
 
+  virtualisation.docker.enable = true;
+
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 
@@ -105,25 +109,38 @@ in
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  home-manager.users.filip = import ../home-manager/home.nix;
-
-  users.users.filip = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+  user = {
+    enable = true;
+    username = "filip";
+    sudoer = true;
+    useHomeManager = true;
+    homeManagerConfig = ../home-manager/home.nix;
   };
+  
+  containers-module.enable = true;
+  
+  #home-manager.users.filip = import ../home-manager/home.nix;
 
+  #users.users.filip = {
+  #  isNormalUser = true;
+  #  extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+  #};
+  
+  programs.gnupg.agent.enable = true;
+  programs.gnupg.agent.pinentryPackage = pkgs.pinentry;
+  
+  services.pcscd.enable = true;
+  
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    neovim
     wget
-    brave
     rider
     jetbrains.phpstorm
     jetbrains.idea-ultimate
     spotify
     steam
-    openrgb-with-all-plugins
     protonplus
     xclicker
     gimp
@@ -131,7 +148,6 @@ in
     libreoffice-qt6-still
     obs-studio
     smartmontools
-    ferium
     prismlauncher
     termscp
     telegram-desktop
@@ -139,16 +155,25 @@ in
     kalker
     teams-for-linux
     postman
-    nodejs_22
-    pnpm
+    nodejs
+    nodePackages_latest.pnpm
+    pinentry
+    remmina
+    yubikey-manager
+    yubikey-personalization
+    yubikey-touch-detector
+    docker
+    vscode
+    dbeaver-bin
+    jdk8
+    r2modman
   ];
 
   programs.tmux = {
     enable = true;
     shortcut = "a";
   };
-
-  programs.git.enable = true;
+  
 
   garuda.dr460nized.enable = true;
   garuda.networking.iwd = false;
