@@ -24,7 +24,7 @@ in
   config = lib.mkIf cfg.enable {
     users.users.${cfg.username} = {
       isNormalUser = true;
-      extraGroups = lib.mkIf cfg.sudoer [ "wheel" ];
+      extraGroups = lib.mkIf cfg.sudoer [ "wheel" "audio" ];
     };
     
     home-manager.users.${cfg.username} = lib.mkIf cfg.useHomeManager (import cfg.homeManagerConfig);

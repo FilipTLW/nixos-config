@@ -5,6 +5,7 @@
 { config
 , lib
 , pkgs
+, inputs
 , ...
 }:
 
@@ -70,17 +71,28 @@ in
 
   nixpkgs.config.allowUnfree = true;
 
-  services.desktopManager.plasma6.enable = true;
+  # services.desktopManager.plasma6.enable = true;
 
   # Enable the X11   windowing system.
   services.xserver.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.displayManager.gdm = {
+    enable = true;
+    wayland = true;
+  };
 
   # Configure keymap in X11
   services.xserver.xkb.layout = "de";
   services.xserver.xkb.options = "eurosign:e,caps:escape";
 
   virtualisation.docker.enable = true;
+  
+  programs.hyprland = {
+    enable = true;
+    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+    xwayland.enable = true;
+  };
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
@@ -88,18 +100,26 @@ in
   # Enable sound.
   # hardware.pulseaudio.enable = true;
   # OR
+  security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
-    pulse.enable = true;  
+    pulse.enable = true;
+    alsa = {
+      enable = true;
+      support32Bit = true;
+    };
+    wireplumber.enable = true;
   };
+  
+  services.gvfs.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
 
-  hardware.opengl.enable = true;
-  hardware.opengl.extraPackages = with pkgs; [
-    #  mesa
-    #  mesa.drivers
+  hardware.graphics.enable = true;
+  hardware.graphics.extraPackages = with pkgs; [
+    mesa
+    mesa.drivers
   ];
   hardware.nvidia = {
     modesetting.enable = true;
@@ -167,6 +187,36 @@ in
     dbeaver-bin
     jdk8
     r2modman
+    kitty
+    dolphin
+    konsole
+    hyprshot
+    ags
+    pciutils
+    bun
+    libgtop
+    libnotify
+    swww
+    esbuild
+    fish
+    typescript
+    dart-sass
+    fd
+    btop
+    bluez
+    gobject-introspection
+    glib
+    bluez-tools
+    grimblast
+    gpu-screen-recorder
+    brightnessctl
+    gnome.gnome-bluetooth
+    python3
+    matugen
+  ];
+  
+  fonts.packages = with pkgs; [
+    nerdfonts
   ];
 
   programs.tmux = {
@@ -175,7 +225,7 @@ in
   };
   
 
-  garuda.dr460nized.enable = true;
+  # garuda.dr460nized.enable = true;
   garuda.networking.iwd = false;
   garuda.performance-tweaks.enable = true;
   garuda.performance-tweaks.cachyos-kernel = true;

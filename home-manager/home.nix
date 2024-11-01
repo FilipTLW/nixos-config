@@ -15,6 +15,7 @@
 
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
+    ./modules/hyprland.nix
   ];
 
   home = {
@@ -41,6 +42,9 @@
       { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; }
     ];
   };
+  
+  hyprland-module.enable = true;
+  hyprland-module.rofi.enable = true;
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
