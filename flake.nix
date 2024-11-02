@@ -4,13 +4,18 @@
   inputs = {
     # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-
-    garuda.url = "gitlab:garuda-linux/garuda-nix-subsystem/stable";
-    garuda.inputs.nixpkgs.follows = "nixpkgs";
-
-    # Home manager
+    
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    chaotic-nyx.url = "github:chaotic-cx/nyx/fix/godot4";
+    chaotic-nyx.inputs.home-manager.follows = "home-manager";
+    
+    garuda.url = "gitlab:garuda-linux/garuda-nix-subsystem/stable";
+    garuda.inputs.nixpkgs.follows = "nixpkgs";
+    garuda.inputs.chaotic-nyx.follows = "chaotic-nyx";
+    
+    # Home manager
     
     hyprland.url = "github:hyprwm/Hyprland";
     

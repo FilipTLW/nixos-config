@@ -33,7 +33,7 @@ config,
         no_hardware_cursors = 1;
       };
     
-      monitor = [ ",preferred,auto,2" ];
+      monitor = [ ",preferred,auto,auto" ];
       general = {
         border_size = 2;
         gaps_in = 5;
