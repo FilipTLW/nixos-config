@@ -40,7 +40,7 @@ config,
         urgent-background:           var(background);
         alternate-normal-foreground: var(foreground);
         selected-active-background:  var(blue);
-        background:                  #291d44aa;<
+        background:                  #291d44aa;
         selected-normal-foreground:  var(lightbg);
         active-background:           var(background);
         alternate-active-foreground: var(blue);
