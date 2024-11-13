@@ -93,6 +93,11 @@ in
     portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
     xwayland.enable = true;
   };
+  
+  hardware.opengl = { # this fixes the "glXChooseVisual failed" bug, context: https://github.com/NixOS/nixpkgs/issues/47932 
+    enable = true;
+    driSupport32Bit = true; 
+  }; 
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
@@ -213,6 +218,9 @@ in
     gnome.gnome-bluetooth
     python3
     matugen
+    lutris
+    wine
+    gnome-keyring
   ];
   
   fonts.packages = with pkgs; [

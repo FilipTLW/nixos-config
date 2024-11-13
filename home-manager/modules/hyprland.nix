@@ -8,19 +8,14 @@ config,
 {
   options.hyprland-module = {
     enable = lib.mkEnableOption "Enable Hyprland config";
-    rofi.enable = lib.mkEnableOption "Enable Rofi App Launcher and Window Switcher";
   };
   
   config = let
-    additional_binds = if config.hyprland-module.rofi.enable then [
+    additional_binds = if config.rofi-module.enable then [
       "$mainMod, space, exec, rofi -show run"
     ] else []; 
   in 
   lib.mkIf config.hyprland-module.enable {
-    
-    home.packages = lib.mkIf config.hyprland-module.rofi.enable [
-      pkgs.rofi
-    ];
   
     wayland.windowManager.hyprland.enable = true;
     wayland.windowManager.hyprland.settings = {
@@ -147,6 +142,7 @@ config,
         "$mainMod SHIFT, 8, movetoworkspace, 8"
         "$mainMod SHIFT, 9, movetoworkspace, 9"
         "$mainMod SHIFT, 0, movetoworkspace, 10"
+        "$mainMod SHIFT, S, exec, hyprshot -m region"
       ] ++ additional_binds;
       
       bindm = [

@@ -16,6 +16,8 @@
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
     ./modules/hyprland.nix
+    ./modules/kitty.nix
+    ./modules/rofi.nix
   ];
 
   home = {
@@ -44,7 +46,8 @@
   };
   
   hyprland-module.enable = true;
-  hyprland-module.rofi.enable = true;
+  rofi-module.enable = true;
+  kitty-module.enable = true;
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
