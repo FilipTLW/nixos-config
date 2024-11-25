@@ -164,6 +164,7 @@ in
     rider
     jetbrains.phpstorm
     jetbrains.idea-ultimate
+    jetbrains.pycharm-professional
     spotify
     steam
     protonplus
@@ -232,6 +233,7 @@ in
     shortcut = "a";
   };
   
+  programs.streamcontroller.enable = true;
 
   # garuda.dr460nized.enable = true;
   garuda.networking.iwd = false;
