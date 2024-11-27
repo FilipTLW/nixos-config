@@ -29,7 +29,7 @@ let
           --prefix PATH : "${lib.makeBinPath extra-path}" \
           --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath extra-lib}"
       ''
-      + attrs.postInstall or "";
+      + (attrs.postInstall or "");
   });
 in
 {
@@ -227,7 +227,7 @@ in
     grimblast
     gpu-screen-recorder
     brightnessctl
-    gnome.gnome-bluetooth
+    gnome-bluetooth
     python3
     matugen
     lutris
