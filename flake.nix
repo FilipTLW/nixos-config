@@ -8,7 +8,7 @@
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    chaotic-nyx.url = "github:chaotic-cx/nyx/fix/godot4";
+    chaotic-nyx.url = "github:chaotic-cx/nyx/main";
     chaotic-nyx.inputs.home-manager.follows = "home-manager";
     
     garuda.url = "gitlab:garuda-linux/garuda-nix-subsystem/stable";
