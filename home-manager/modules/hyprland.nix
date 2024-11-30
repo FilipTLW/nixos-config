@@ -41,18 +41,23 @@ config,
         layout = "dwindle";
       };
       
+      render = {
+        explicit_sync = 0;
+        explicit_sync_kms = 0;
+      };
+      
       decoration = {
         rounding = 20;
         
         active_opacity = 0.90;
         inactive_opacity = 0.90;
 
-	shadow = {
-	  enabled = true;
-	  range = 4;
-	  color = "rgba(1a1a1aee)";
-	  render_power = 3;
-	};
+        shadow = {
+          enabled = true;
+          range = 4;
+          color = "rgba(1a1a1aee)";
+          render_power = 3;
+        };
 
         blur = {
           enabled = true;
