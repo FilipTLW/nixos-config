@@ -125,6 +125,7 @@ config,
         "$mainMod, E, exec, $fileManager"
         "$mainMod, C, killactive"
         "$mainMod, F, togglefloating"
+        "$mainMod, F11, fullscreen"
         "$mainMod, left, movefocus, l"
         "$mainMod, right, movefocus, r"
         "$mainMod, up, movefocus, u"
@@ -158,6 +159,7 @@ config,
       ];
       
       exec-once = [
+        "dbus-update-activation-environment --systemd DISPLAY"
       ];
     };
   };

@@ -44,11 +44,11 @@ in
     "nix-command"
     "flakes"
   ];
-
+  
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
+  
   networking.hostName = "filipnixos"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -80,6 +80,8 @@ in
     enable = true;
     wayland = true;
   };
+  
+  security.pam.services.gdm.enableGnomeKeyring = true;
 
   # Configure keymap in X11
   services.xserver.xkb.layout = "de";
@@ -102,7 +104,7 @@ in
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 
-  # Enable sound.
+  #60180a184cfb32b61a1d871c058b31a3b9b0743d Enable sound.
   # hardware.pulseaudio.enable = true;
   # OR
   security.rtkit.enable = true;
@@ -130,9 +132,12 @@ in
     modesetting.enable = true;
     nvidiaSettings = true;
     open = false;
-    # package = config.boot.kernelPackages.nvidiaPackages.stable;
-    
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    #package = config.boot.kernelPackages.nvidiaPackages.production;
   };
+  
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   user = {
@@ -166,6 +171,7 @@ in
     jetbrains.phpstorm
     jetbrains.idea-ultimate
     jetbrains.pycharm-professional
+    jetbrains.datagrip
     spotify
     steam
     protonplus
@@ -226,10 +232,22 @@ in
     discord
     lsof
     switcheroo
+    zed-editor
+    nmon
+    direnv
+    adwsteamgtk
   ];
   
+  nixpkgs.config.permittedInsecurePackages = [
+    "dotnet-sdk-6.0.428"
+    "dotnet-runtime-6.0.36"
+    "dotnet-sdk-wrapped-6.0.428"
+    "dotnet-sdk-7.0.410"
+  ];
+
+  
   fonts.packages = with pkgs; [
-    nerdfonts
+    nerd-fonts.jetbrains-mono
   ];
 
   programs.tmux = {
@@ -238,6 +256,8 @@ in
   };
   
   programs.streamcontroller.enable = true;
+  
+  programs.nix-ld.enable = true;
 
   # garuda.dr460nized.enable = true;
   garuda.networking.iwd = false;

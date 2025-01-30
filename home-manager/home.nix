@@ -23,6 +23,10 @@
   home = {
     username = "filip";
     homeDirectory = "/home/filip";
+    
+    packages = with pkgs; [
+      vimix-cursors
+    ];
   };
 
   # Add stuff for your user as you see fit:
@@ -51,6 +55,28 @@
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
+  
+  services.gnome-keyring.enable = true;
+  
+  home.pointerCursor = {
+    name = "Vimix-cursors";
+    package = pkgs.vimix-cursors;
+    size = 24;
+    x11 = {
+      enable = true;
+      defaultCursor = "Vimix-cursors";
+    };
+  };
+  
+  home.sessionVariables = {
+      XCURSOR_THEME = "Vimix-cursors";
+      XCURSOR_SIZE = "24";
+    };
+  
+    # Apply changes
+    home.activation.setCursor = config.lib.dag.entryAfter ["writeBoundary"] ''
+      ${pkgs.xorg.xrdb}/bin/xrdb -merge ~/.Xresources
+    '';
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "24.05";

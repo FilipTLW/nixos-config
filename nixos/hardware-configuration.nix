@@ -40,6 +40,11 @@
     device = "/dev/disk/by-uuid/48cb7d97-293f-4ad2-acec-41b5b6daadd6";
     fsType = "ext4";
   };
+  
+  fileSystems."/data" = {
+    device = "/dev/disk/by-uuid/05f3d886-926a-455d-9a1a-252a95687ecb";
+    fsType = "ext4";
+  };
 
   #swapDevices =
   #  [ { device = "/dev/disk/by-uuid/b199e9b2-8017-453e-9de1-c0bb75ab8d7e"; }
