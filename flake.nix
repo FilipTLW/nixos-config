@@ -15,18 +15,23 @@
     garuda.inputs.nixpkgs.follows = "nixpkgs";
     garuda.inputs.chaotic-nyx.follows = "chaotic-nyx";
     
+    nix-colors.url = "github:misterio77/nix-colors";
+    
+    nixvim.url = "github:nix-community/nixvim";
+    
     # Home manager
     
     hyprland.url = "github:hyprwm/Hyprland";
-    
-    hyprpanel.url = "github:Jas-SinghFSU/HyprPanel";
+       
+    vo1ded-panel.url = "github:FilipTLW/vo1ded-panel";
+    vo1ded-panel.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
+  
     {
       self,
       nixpkgs,
-      home-manager,
       garuda,
       ...
     }@inputs:
@@ -52,16 +57,19 @@
 
       # Standalone home-manager configuration entrypoint
       # Available through 'home-manager --flake .#your-username@your-hostname'
-      homeConfigurations = {
-        # FIXME replace with your username@hostname
-        "your-username@your-hostname" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-          extraSpecialArgs = {
-            inherit inputs outputs;
-          };
-          # > Our main home-manager configuration file <
-          modules = [ ./home-manager/home.nix ];
-        };
-      };
+      #homeConfigurations = {
+      #  # FIXME replace with your username@hostname
+      #  "filip@filipnixos" = home-manager.lib.homeManagerConfiguration {
+      #    pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
+      #    extraSpecialArgs = {
+      #      inherit nix-colors;
+      #    };
+      #    # > Our main home-manager configuration file <
+      #    modules = [ 
+      #      #nix-colors.homeManagerModules.default 
+      #      ./home-manager/home.nix 
+      #    ];
+      # };
+      #};
     };
 }

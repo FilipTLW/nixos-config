@@ -45,6 +45,10 @@ in
     "flakes"
   ];
   
+  nixpkgs.overlays = [(final: prev: {
+    vo1ded-panel = inputs.vo1ded-panel.packages.x86_64-linux.default;
+  })]; 
+  
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -70,12 +74,15 @@ in
   };
 
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.permittedInsecurePackages = [
+    "dotnet-sdk-6.0.428"
+    "dotnet-runtime-6.0.36"
+  ];
 
   # services.desktopManager.plasma6.enable = true;
 
   # Enable the X11   windowing system.
   services.xserver.enable = true;
-  services.xserver.videoDrivers = [ "nvidia" ];
   services.xserver.displayManager.gdm = {
     enable = true;
     wayland = true;
@@ -128,13 +135,6 @@ in
     mesa
     mesa.drivers
   ];
-  hardware.nvidia = {
-    modesetting.enable = true;
-    nvidiaSettings = true;
-    open = false;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-    #package = config.boot.kernelPackages.nvidiaPackages.production;
-  };
   
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
@@ -165,13 +165,14 @@ in
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    neovim
     wget
     rider
     jetbrains.phpstorm
     jetbrains.idea-ultimate
     jetbrains.pycharm-professional
     jetbrains.datagrip
+    jetbrains.rust-rover
+    jetbrains.clion
     spotify
     steam
     protonplus
@@ -201,8 +202,6 @@ in
     jdk8
     r2modman
     kitty
-    dolphin
-    konsole
     hyprshot
     ags
     pciutils
@@ -236,16 +235,25 @@ in
     nmon
     direnv
     adwsteamgtk
+    zulu17
+    gsettings-desktop-schemas
+    obsidian
+    devenv
+    osslsigncode
   ];
   
-  nixpkgs.config.permittedInsecurePackages = [
-    "dotnet-sdk-6.0.428"
-    "dotnet-runtime-6.0.36"
-    "dotnet-sdk-wrapped-6.0.428"
-    "dotnet-sdk-7.0.410"
-  ];
+  virtualisation.waydroid.enable = true;
+  virtualisation.virtualbox.host = {
+    enable = true;
+    enableKvm = true;
+    addNetworkInterface = false;
+  };
+  
+  environment.sessionVariables = {
+    GSETTINGS_SCHEMA_DIR = "${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}/glib-2.0/schemas";
+    GTK_THEME = "vo1ded-dark";
+  };
 
-  
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
   ];
@@ -282,7 +290,7 @@ in
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  networking.firewall.enable = false;
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you

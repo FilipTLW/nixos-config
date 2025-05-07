@@ -1,5 +1,4 @@
 {
-inputs,
 pkgs,
 lib,
 config,
@@ -110,7 +109,7 @@ config,
         padding:          5;
         background-color: var(background);
         border:           1;
-        border-radius:    20px;
+        border-radius:    0;
         transparency:     "real";
     }
     mainbox {

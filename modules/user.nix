@@ -1,4 +1,4 @@
-{ lib, config, pkgs, ... }:
+{ lib, config, inputs, ... }:
 let
   cfg = config.user; 
 in
@@ -27,6 +27,13 @@ in
       extraGroups = lib.mkIf cfg.sudoer [ "wheel" "audio" ];
     };
     
-    home-manager.users.${cfg.username} = lib.mkIf cfg.useHomeManager (import cfg.homeManagerConfig);
+    home-manager.users.${cfg.username} = lib.mkIf cfg.useHomeManager (
+      import cfg.homeManagerConfig { 
+        nix-colors = inputs.nix-colors; 
+        nixvim = inputs.nixvim;
+        nixpkgs = inputs.nixpkgs;
+        ags = inputs.ags;
+      } 
+    );
   };
 }
