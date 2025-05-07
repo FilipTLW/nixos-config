@@ -24,14 +24,14 @@ config,
           size = {
             binaryPrefix = "si";
           };
-          color = "";
+          color = "1;38;5;201";
         };
         modules = [
           "title"
           {
             type = "os";
             key = " OS";
-            keyColor = "1;38;5;200";
+            keyColor = "1;38;5;201";
             format = "{name} {version}";
           }
           {
