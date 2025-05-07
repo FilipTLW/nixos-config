@@ -46,7 +46,7 @@ config,
           }
           {
             type = "shell";
-            key = "└ shell";
+            key = "└ Shell";
             keyColor = "1;38;5;201";
           }
           "break"
