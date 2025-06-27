@@ -2,6 +2,7 @@
   nix-colors,
   nixvim,
   ags,
+  vimix-cursors,
   ...
 }:
 {
@@ -48,10 +49,14 @@ in
     homeDirectory = "/home/filip";
 
     packages = with pkgs; [
-      vimix-cursors
       glib
       dconf
       swww
+      #(pkgs.runCommandLocal "vimix-cursors-fix" {} ''
+      #  dir=$out/share/icons
+      #  mkdir -p $dir
+      #  ln -s ${pkgs.vimix-cursors}/share/icons/Vimix-cursors $dir/default
+      #'')
     ];
   };
 
@@ -103,14 +108,13 @@ in
   home.pointerCursor = {
     enable = true;
     name = "Vimix-cursors";
-    package = pkgs.vimix-cursors;
+    package = vimix-cursors.packages.x86_64-linux.vimix-cursors;
     size = 24;
     gtk.enable = true;
     x11 = {
       enable = true;
     };
   };
-
   home.sessionVariables = {
     XCURSOR_THEME = "Vimix-cursors";
     XCURSOR_SIZE = "24";

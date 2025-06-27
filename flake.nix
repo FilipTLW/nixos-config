@@ -23,16 +23,13 @@
     vo1ded-panel.url = "github:FilipTLW/vo1ded-panel";
     vo1ded-panel.inputs.nixpkgs.follows = "nixpkgs";
 
-    rose-pine-hyprcursor = {
-      url = "github:ndom91/rose-pine-hyprcursor";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.hyprlang.follows = "hyprland/hyprlang";
-    };
-
     lix = {
       url = "https://git.lix.systems/lix-project/nixos-module/archive/2.92.0-3.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # forgive me..
+    vimix-cursors.url = "path:./subflakes/vimix-cursors";
   };
 
   outputs =

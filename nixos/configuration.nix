@@ -45,6 +45,7 @@ in
 
   nixpkgs.overlays = [(final: prev: {
     vo1ded-panel = inputs.vo1ded-panel.packages.x86_64-linux.default;
+    vimix-cursors = inputs.vimix-cursors.packages.x86_64-linux.vimix-cursors;
   })];
 
   boot.loader.systemd-boot.enable = true;
@@ -66,6 +67,12 @@ in
     "dotnet-sdk-6.0.428"
     "dotnet-runtime-6.0.36"
   ];
+  nixpkgs.config.packageOverrides = pkgs: {
+    vimix-cursors = pkgs.callPackage (fetchTarball {
+      url = "https://github.com/NixOS/nixpkgs/archive/30a61f056ac492e3b7cdcb69c1e6abdcf00e39cf.tar.gz";
+      sha256 = "sha256:1l6kn2g9xf1rl179av9h3lc9szbnvf13l9arnmi9x81l9b1vw8gw";
+    } + "/pkgs/by-name/vi/vimix-cursors/package.nix") {};
+  };
 
   services.udev.extraRules = ''
     SUBSYSTEM=="usb", ATTR{idVendor}=="04e8", MODE="0666", GROUP="adbusers"
@@ -213,8 +220,6 @@ in
     obsidian
     devenv
     osslsigncode
-  ] ++ [
-    inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
   ];
 
   virtualisation.waydroid.enable = true;
